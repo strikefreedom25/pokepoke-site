@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポケモンカード検索</title>
+    <style sec="style.css"></style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Pokémon TCG Pocket カード検索サイト</h1>
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="カード名で検索">
+            <button type="submit">検索</button>
+        </form>
+        <div class="filter-row">
+            <div class="filter-pair">
+                <label for="typeSelect">タイプ</label>
+                <select id="typeSelect">
+                    <option value="all">全て</option>
+                    <option value="1">草</option>
+                    <option value="2">炎</option>
+                    <option value="3">水</option>
+                    <option value="4">雷</option>
+                    <option value="5">超</option>
+                    <option value="6">闘</option>
+                    <option value="7">悪</option>
+                    <option value="8">鋼</option>
+                    <option value="9">ドラゴン</option>
+                    <option value="10">無</option>
+                </select>
+            </div>
+            <div class="filter-pair">
+                <label for="exSelect">ex</label>
+                <select id="exSelect">
+                    <option value="all">全て</option>
+                    <option value="1">ex</option>
+                    <option value="0">ex以外</option>
+                </select>
+            </div>
+            <div class="filter-pair">
+                <label for="evoSelect">進化</label>
+                <select id="evoSelect">
+                    <option value="all">全て</option>
+                    <option value="0">たね</option>
+                    <option value="1">1進化</option>
+                    <option value="2">2進化</option>
+                </select>
+            </div>
+            <div class="filter-pair">
+                <label for="abilitySelect">特性</label>
+                <select id="abilitySelect">
+                    <option value="all">全て</option>
+                    <option value="has">あり</option>
+                    <option value="none">なし</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <div id="checkboxMode">
+            <label><input type="radio" name="mode" value="or" checked> いずれか含む</label>
+            <label><input type="radio" name="mode" value="and"> 両方含む</label>
+        </div>
+
+        <h4 id ="skillColumn">スキル欄</h4>
+        <div id="skillSelect">
+            <label><input type="checkbox" id="selectAllSkills"> 全て選択</label>
+            <label><input type="checkbox" name="skill" value="heal"> 回復</label>
+            <label><input type="checkbox" name="skill" value="damage"> 攻撃</label>
+            <label><input type="checkbox" name="skill" value="defense"> 防御</label>
+            <label><input type="checkbox" name="skill" value="status"> 状態異常</label>
+            <!--<label><input type="checkbox" name="skill" value="draw"> ドロー</label>-->
+            <label><input type="checkbox" name="skill" value="search"> サーチ</label>
+            <label><input type="checkbox" name="skill" value="energy_gain"> エネ取得</label>
+            <label><input type="checkbox" name="skill" value="energy_trash"> エネトラッシュ</label>
+            <label><input type="checkbox" name="skill" value="move"> 移動系</label>
+            <label><input type="checkbox" name="skill" value="risk"> デメリット付き</label>
+            <label><input type="checkbox" name="skill" value="buff"> バフ</label>
+            <label><input type="checkbox" name="skill" value="debuff"> デバフ</label>
+            <label><input type="checkbox" name="skill" value="other"> その他</label>
+
+        </div>
+
+        <!-- 回復の詳細 -->
+        <div id="healDetailContainer" class="detail-container">
+            <label for="healDetailSelect">回復の詳細条件</label>
+            <select id="healDetailSelect">
+                <option value="all">全て</option>
+                <option value="self">自分</option>
+                <option value="own_all">味方全員</option>
+                <!--<option value="others">その他</option>-->
+            </select>
+        </div>
+
+        <!-- 攻撃の詳細 -->
+        <div id="damageDetailContainer" class="detail-container">
+            <label for="damageDetailSelect">攻撃の詳細条件</label>
+            <select id="damageDetailSelect">
+                <option value="all">全て</option>
+                <option value="opponent_choice">相手を選んで攻撃</option>
+                <option value="opponent_bench_choice">相手ベンチの中から選んで攻撃</option>
+                <option value="opponent_bench_all">相手ベンチ全員に攻撃</option>
+                <option value="coin">コイントス系</option>
+                <option value="opponent_active_ex">相手がexなら追加ダメ</option>
+                <option value="random">ランダムな敵に攻撃</option>
+                <option value="counter">反撃</option>
+                <option value="others">その他</option>
+            </select>
+        </div>
+
+        <!-- 防御の詳細 -->
+        <div id="defenseDetailContainer" class="detail-container">
+            <label for="defenseDetailSelect">防御の詳細条件</label>
+            <select id="defenseDetailSelect">
+                <option value="all">全て</option>
+                <option value="damage_reduction">ダメージ軽減</option>
+                <option value="effect_nullify">コイン表ならわざのダメージや効果を受けない</option>
+                <option value="others">その他</option>
+            </select>
+        </div>
+
+        <!-- 状態異常の詳細（既にOK） -->
+        <div id="statusDetailContainer" class="detail-container">
+            <label for="statusDetailSelect">状態異常の詳細条件</label>
+            <select id="statusDetailSelect">
+                <option value="all">全て</option>
+                <option value="burn">やけど</option>
+                <option value="poison">どく</option>
+                <option value="sleep">ねむり</option>
+                <option value="paralyze">まひ</option>
+                <option value="confusion">こんらん</option>
+                <!--<option value="others">その他</option>-->
+            </select>
+        </div>
+
+        <!-- サーチの詳細 -->
+        <div id="searchDetailContainer" class="detail-container">
+            <label for="searchDetailSelect">ドローとサーチの詳細条件</label>
+            <select id="searchDetailSelect">
+                <option value="all">全て</option>
+                <option value="specific_card_to_bench">特定のモンスターをサーチし、ベンチ場へ</option>
+                <option value="grass">草ポケモンをドロー</option>
+                <option value="monster">たねポケモンをドロー</option>
+                <option value="lycanroc">イワンコの進化先ポケモンをドロー</option>
+            </select>
+        </div>
+
+        <!-- トラッシュの詳細
+    <div id="trashDetailContainer" class="detail-container">
+        <label for="trashDetailSelect">トラッシュの詳細条件</label>
+        <select id="trashDetailSelect">
+            <option value="all">全て</option>
+            <option value="hand">手札</option>
+            <option value="deck">山札</option>
+            <option value="bench">ベンチ</option>
+            <option value="others">その他</option>
+        </select>
+    </div>-->
+
+        <!-- エネ取得 -->
+        <div id="energy_gainDetailContainer" class="detail-container">
+            <label for="energy_gainDetailSelect">エネ取得の詳細条件</label>
+            <select id="energy_gainDetailSelect">
+                <!--エネ色で検索orエネ数で検索-->
+                <option value="all">全て</option>
+                <option value="grass">草</option>
+                <option value="fire">炎</option>
+                <option value="water">水</option>
+                <option value="lightning">雷</option>
+                <option value="psychic">超</option>
+                <!--<option value="fighting">闘(なし)</option>
+                <option value="darkness">悪(なし)</option>-->
+                <option value="metal">鋼</option>
+                <option value="C">無</option>
+            </select>
+        </div>
+
+        <!-- エネトラッシュ -->
+        <div id="energy_trashDetailContainer" class="detail-container">
+            <label for="energy_trashDetailSelect">エネトラッシュの詳細条件</label>
+            <select id="energy_trashDetailSelect">
+                <option value="all">全て</option>
+                <option value="self">自分</option>
+                <option value="opponent_active">相手のバトル場</option><!--opponent?-->>
+                <option value="all_energy">自分と相手の場にある全てのエネルギーからランダムに</option>
+            </select>
+        </div>
+
+        <!-- 移動系 -->
+        <div id="moveDetailContainer" class="detail-container">
+            <label for="moveDetailSelect">移動系の詳細条件</label>
+            <select id="moveDetailSelect">
+                <option value="all">全て</option>
+                <option value="self">自分のモンスター移動</option>
+                <option value="opponent_active">相手のモンスター移動</option>
+                <option value="a">自陣のエネルギー移動</option><!--未-->>
+                <option value="">その他</option>
+            </select>
+        </div>
+
+        <!-- デメリット付き -->
+        <div id="riskDetailContainer" class="detail-container">
+            <label for="riskDetailSelect">デメリット付きの詳細条件</label>
+            <select id="riskDetailSelect">
+                <option value="all">全て</option>
+                <option value="self_dmg">自傷</option>
+                <option value="restriction">次の番わざ使用不可</option>
+                <option value="aa">自分を状態異常に</option><!--未、いらない？-->
+                <option value="">その他</option>
+            </select>
+        </div>
+
+        <!-- バフ -->
+        <div id="buffDetailContainer" class="detail-container">
+            <label for="buffDetailSelect">バフの詳細条件</label>
+            <select id="buffDetailSelect">
+                <option value="all">全て</option>
+                <option value="attack">攻撃上昇</option>
+                <option value="">その他</option>
+            </select>
+        </div>
+
+        <!-- デバフ -->
+        <div id="debuffDetailContainer" class="detail-container">
+            <label for="debuffDetailSelect">デバフの詳細条件</label>
+            <select id="debuffDetailSelect">
+                <option value="all">全て</option>
+                <option value="attack">攻撃減少</option>
+                <option value="cannot_retreat">次の番逃げられない</option>
+                <option value="">その他</option>
+            </select>
+        </div>
+
+        <!-- その他 -->
+        <div id="othersDetailContainer" class="detail-container">
+            <label for="othersDetailSelect">その他の詳細条件</label>
+            <select id="othersDetailSelect">
+                <option value="all">全て</option>
+                <option value="reval_hand">相手の手札を見る</option>
+            </select>
+        </div>
+
+        <button id="resetButton">リセット</button>
+
+        <div id="cardContainer"></div>
+
+
+
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
