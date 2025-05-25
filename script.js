@@ -158,7 +158,7 @@ function applyAllFilters() {
     const filtered = cards.filter(card => {
         const cardName = toHiragana(card.name);
         const searchKeyword = toHiragana(keyword);
-        const matchName = keyword === "" || cardName.includes(searchKeyword);
+        const matchName = keyword === "" || cardName.startsWith(searchKeyword);
         const matchType = typeValue === "all" || parseInt(card.type) === parseInt(typeValue);
 
         const matchEx = (
@@ -196,7 +196,6 @@ function applyAllFilters() {
         );
 
         return matchName && matchType && matchSkill && matchEx && matchEvo && matchAbility;
-        console.log(card.name, card.character_ability, typeof card.character_ability);
     });
 
     renderCards(filtered);
@@ -375,6 +374,17 @@ document.querySelectorAll('select[id$="DetailSelect"]').forEach(select => {
     select.addEventListener("change", applyAllFilters);
 });
 
+//開閉処理
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggleSkillBtn");
+    const skillSection = document.getElementById("skillSection");
+
+    toggleBtn.addEventListener("click", function () {
+        const isHidden = skillSection.style.display === "none" || skillSection.style.display === "";
+        skillSection.style.display = isHidden ? "block" : "none";
+        toggleBtn.textContent = isHidden ? "スキル欄を隠す" : "スキル欄を表示";
+    });
+});
 
 // ページ読み込み時に全カードを表示
 window.onload = () => {

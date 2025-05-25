@@ -1,7 +1,7 @@
 /* ベース設定 */
 body {
     font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
     color: #333;
@@ -26,100 +26,129 @@ form {
     margin-bottom: 20px;
 }
 
+#checkboxMode {
+    display: none;
+}
+
+/* 検索欄 */
 input[type="text"] {
     padding: 10px;
-    width: 250px;
+    width: 500px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1em;
+    height: 30px;
+    margin: 20px 0;
 }
 
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    margin: 20px 0;
+}
+
+/* 青いボタン */
 button[type="submit"],
 #resetButton {
-    padding: 10px 20px;
     background-color: #2980b9;
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 1em;
     cursor: pointer;
+    border-radius: 5px;
 }
 
+/*検索ボタンに触れると色が変わる*/
 button:hover,
 #resetButton:hover {
     background-color: #1f6391;
 }
 
-/*タイプ、進化、exを横並びに*/
+/* フィルター：PCでは横並び */
 .filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 20px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-bottom: 20px;
 }
+
+/* 各フィルターのペア（ラベル＋セレクト） */
+
 .filter-pair {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    max-width: 100%;
 }
+
 .filter-pair label {
-  font-weight: bold;
-  white-space: nowrap;
+    width: 100%;
+    text-align: left;
+    margin: -5px;
 }
+
+
+/* セレクト */
 .filter-pair select {
-  padding: 6px 8px;
-  font-size: 1em;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
 }
 
-
-
-/* セレクト項目 */
+/* 汎用セレクト・ラベル */
 label,
 select {
     display: block;
     margin: 10px 0 5px;
 }
-.detail-container {
-    display: none;
-}
 
 
-select {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #bbb;
-    width: 100%;
-    max-width: 300px;
-}
-#checkboxMode{
-    display: none;
-}
+
 
 /* スキル選択 */
-#skillColumn{
+#skillColumn {
     margin-bottom: 0;
 }
+
 #skillSelect {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: center;
+    gap: 0px;
     margin-bottom: 20px;
+    width: 100%;
+    max-width: 100%;
 }
 
+/*回復からその他まで*/
 #skillSelect label {
     background: #ecf0f1;
-    padding: 5px 10px;
+    padding: 0px;
     border-radius: 20px;
     cursor: pointer;
     user-select: none;
+    margin: 20px 1px;
+    flex: 0 0 calc(17% - 8px);
+    /* 横幅を2分割（gapの分を差し引く） */
+    font-size: 0.9em;
+    margin-bottom: -10px;
+    align-items: center;
+    /* チェックボックスと文字を垂直中央に揃える */
 }
 
 #skillSelect input[type="checkbox"] {
-    margin-right: 5px;
+    margin: 10px 0px 10px 20px;
+    padding-top: 0px;
+
 }
 
-/* 各スキル詳細セクション */
+
+/* 各スキル詳細 */
 [id$="DetailContainer"] {
     margin-bottom: 20px;
     background-color: #ffffff;
@@ -128,25 +157,29 @@ select {
     border-radius: 5px;
 }
 
-/* メディア対応 */
-@media screen and (max-width: 600px) {
-    form {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    input[type="text"] {
-        width: 100%;
-        max-width: 90%;
-    }
-
-    #skillSelect {
-        flex-direction: column;
-        gap: 5px;
-    }
+/*それぞれの詳細条件*/
+.detail-container {
+    display: none;
 }
 
-/* カード一覧全体 */
+.detail-container select {
+    width: 250px;
+    height: 35px;
+    /* 必要に応じて調整 */
+    padding: 8px;
+    font-size: 0.8em;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    margin: 5px 0 0 0;
+}
+
+.detail-container label {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+
+/* カード一覧 */
 #cardContainer {
     margin-top: 30px;
     padding: 15px;
@@ -165,7 +198,7 @@ select {
     border: none;
 }
 
-/* カードヘッダー（アイコン＋名前） */
+/* カードヘッダー */
 .card-header {
     display: flex;
     align-items: center;
@@ -178,7 +211,8 @@ select {
     height: 18px;
     margin-left: 2px;
     vertical-align: middle;
-    position: relative; bottom: 1px;
+    position: relative;
+    bottom: 1px;
 }
 
 .card-title {
@@ -186,13 +220,18 @@ select {
     margin: 0;
     padding: 0;
 }
-.card p, .label, .value .packName{
-    font-size: 0.9em; /* ← 軽く調整（14〜15px） */
+
+.card p,
+.label,
+.value .packName {
+    font-size: 0.9em;
 }
-.value{
+
+.value {
     margin-right: 5px;
 }
-.packName{
+
+.packName {
     margin-left: 50px;
 }
 
@@ -202,15 +241,15 @@ select {
     height: 28px;
 }
 
-/* カードの情報ブロック */
+/* カード詳細 */
 .card-body {
     padding: 2px;
 }
 
 .card-info {
     display: flex;
-    justify-content: flex-start; /* ← 距離を詰めたい場合はこちら */
-    gap: 10px;                     /* ← ラベルと値の間隔を調整 */
+    justify-content: flex-start;
+    gap: 10px;
     margin-bottom: 6px;
 }
 
@@ -220,45 +259,157 @@ select {
     margin-top: 2px;
 }
 
+/* トグルボタンのスタイル */
+.toggle-skill-btn {
+    display: none;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-/* タイプ別色分け */
+/* デフォルト：大画面では表示 */
+#skillSection {
+    display: block;
+}
+
+#allselect {
+    display: none;
+}
+
+
+/* タイプ別背景色 */
 .card.grass {
     background-color: #ccebc5;
     color: #1a3c1a;
 }
+
 .card.fire {
     background-color: #f4cccc;
     color: #660000;
 }
+
 .card.water {
     background-color: #cfe2f3;
     color: #003366;
 }
+
 .card.electric {
     background-color: #fff2ac;
     color: #665500;
 }
+
 .card.psychic {
     background-color: #f4d7f5;
     color: #4b0055;
 }
+
 .card.fighting {
     background-color: #fce5cd;
     color: #663300;
 }
+
 .card.dark {
     background-color: #999999;
     color: #ffffff;
 }
+
 .card.steel {
     background-color: #d9d9d9;
     color: #333333;
 }
+
 .card.dragon {
     background-color: #ffe599;
     color: #554400;
 }
+
 .card.colorless {
     background-color: #eeeeee;
     color: #222222;
+}
+
+@media screen and (max-width: 1000px) {
+    #skillSelect label {
+
+        flex: 0 0 calc(25% - 8px);
+        /* 横幅を2分割（gapの分を差し引く） */
+    }
+}
+
+/* メディア対応（タブレット） */
+@media screen and (max-width: 768px) {
+    form {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    input[type="text"] {
+        width: 250px;
+        max-width: 90%;
+        font-size: 1em;
+    }
+
+    select,
+    button[type="submit"],
+    #resetButton {
+        width: 70px;
+        /* ← 固定サイズにする */
+        padding: 2px 0;
+        font-size: 0.5em;
+        /* ← 大きくなりすぎないよう調整 */
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+
+    #skillSelect {
+        gap: 8px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #skillSelect label {
+        font-size: 0.8em;
+        flex: 0 0 calc(33% - 8px);
+    }
+
+    #skillSelect input[type="checkbox"] {
+        margin: 10px 0px 10px 10px;
+    }
+
+    #cardContainer {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .toggle-skill-btn {
+        display: block;
+    }
+
+    #skillSection {
+        display: none;
+        margin-bottom: 10px;
+    }
+    h4{
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 769px) {
+    #skillSection {
+        display: block !important;
+    }
 }

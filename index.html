@@ -67,25 +67,31 @@
             <label><input type="radio" name="mode" value="and"> 両方含む</label>
         </div>
 
-        <h4 id ="skillColumn">スキル欄</h4>
-        <div id="skillSelect">
-            <label><input type="checkbox" id="selectAllSkills"> 全て選択</label>
-            <label><input type="checkbox" name="skill" value="heal"> 回復</label>
-            <label><input type="checkbox" name="skill" value="damage"> 攻撃</label>
-            <label><input type="checkbox" name="skill" value="defense"> 防御</label>
-            <label><input type="checkbox" name="skill" value="status"> 状態異常</label>
-            <!--<label><input type="checkbox" name="skill" value="draw"> ドロー</label>-->
-            <label><input type="checkbox" name="skill" value="search"> サーチ</label>
-            <label><input type="checkbox" name="skill" value="energy_gain"> エネ取得</label>
-            <label><input type="checkbox" name="skill" value="energy_trash"> エネトラッシュ</label>
-            <label><input type="checkbox" name="skill" value="move"> 移動系</label>
-            <label><input type="checkbox" name="skill" value="risk"> デメリット付き</label>
-            <label><input type="checkbox" name="skill" value="buff"> バフ</label>
-            <label><input type="checkbox" name="skill" value="debuff"> デバフ</label>
-            <label><input type="checkbox" name="skill" value="other"> その他</label>
+        <button id="toggleSkillBtn" class="toggle-skill-btn">スキル欄を表示</button>
 
+
+        <!-- スキル欄 -->
+        <div id="skillSection">
+            <h4 id="skillColumn">スキル欄</h4>
+
+            <div id="skillSelect">
+                <label id="allselect"><input type="checkbox" id="selectAllSkills"> 全て選択</label>
+                <label><input type="checkbox" name="skill" value="heal"> 回復</label>
+                <label><input type="checkbox" name="skill" value="damage"> 攻撃</label>
+                <label><input type="checkbox" name="skill" value="defense"> 防御</label>
+                <label><input type="checkbox" name="skill" value="status"> 状態異常</label>
+                <!--<label><input type="checkbox" name="skill" value="draw"> ドロー</label>-->
+                <label><input type="checkbox" name="skill" value="search"> サーチ</label>
+                <label><input type="checkbox" name="skill" value="energy_gain"> エネ取得</label>
+                <label><input type="checkbox" name="skill" value="energy_trash"> エネトラッシュ</label>
+                <label><input type="checkbox" name="skill" value="move"> 移動系</label>
+                <label><input type="checkbox" name="skill" value="risk"> デメリット付き</label>
+                <label><input type="checkbox" name="skill" value="buff"> バフ</label>
+                <label><input type="checkbox" name="skill" value="debuff"> デバフ</label>
+                <label><input type="checkbox" name="skill" value="other"> その他</label>
+
+            </div>
         </div>
-
         <!-- 回復の詳細 -->
         <div id="healDetailContainer" class="detail-container">
             <label for="healDetailSelect">回復の詳細条件</label>
