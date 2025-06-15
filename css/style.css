@@ -1,0 +1,655 @@
+* {
+    box-sizing: border-box;
+}
+
+/* ベース設定 */
+body {
+    font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden;
+    /* パネル単体の横スクロール禁止 */
+}
+
+main {
+    padding: 0px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.2em;
+    color: #2c3e50;
+}
+
+/* フォーム全体 */
+form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+/* ============================================
+   🔹 デッキビルダー用レイアウト追加スタイル
+============================================ */
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* 左右パネル */
+.left-panel,
+.right-panel {
+    width: 50%;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+
+.left-panel p {
+    margin: 0;
+    font-size: 12px;
+    padding-left: 16px;
+}
+
+/* カードドロップゾーン */
+.card-drop-zone {
+    min-height: 200px;
+    margin: 10px 0;
+    padding: 10px 0 10px 5px;
+    background-color: #4b4c4d;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 100%;
+}
+
+.card-drop-zone>div {
+    height: 40px;
+    border: 1px solid black;
+    max-width: 97%;
+}
+
+
+.card.unknown {
+    background-color: white;
+}
+
+.card-drop-zone .card-header {
+    margin: 0;
+    width: 150px;
+}
+
+.card-drop-zone h2 {
+    font-size: 0.9em;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    /* 横に並べて間隔空ける */
+    gap: 2px;
+}
+
+#column,
+.target-select-section {
+    display: flex;
+    flex-direction: column;
+    /* ← 縦方向にする */
+}
+
+.button-row button {
+    flex: 1;
+    font-size: 10px;
+    margin-bottom: 2px;
+}
+
+/*全てのボタン*/
+button {
+    font-size: 12px;
+    background-color: #4b4c4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #4b4c4d;
+    size: 30px;
+}
+
+.drop-instruction {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 5px 0;
+}
+
+.deck-tools {
+    display: flex;
+    /* 横並びにする */
+    gap: 20px;
+    /* パネル間のスペース */
+    margin-top: 20px;
+    justify-content: center;
+    /* 中央寄せ */
+    flex-wrap: wrap;
+    /* 画面幅が狭い場合に折り返す */
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+
+/* ============================================
+   🔹 確率計算用スタイル
+============================================ */
+/*欲しいモンスターを選択*/
+.target-select-section select {
+    width: 100%;
+    /* ← 親要素に合わせて全幅に広がる */
+    height: 30px;
+    border-color: black;
+}
+
+.select-container {
+    display: flex;
+    justify-content: space-between;
+    /* または center や start も選べる */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.target-select-section {
+    flex: 1;
+    /* 均等な3分割 */
+    display: flex;
+    /* 均等に幅を持たせたい場合 */
+    flex-direction: column;
+    /* ← labelとselectを縦並びに */
+    align-items: flex-start;
+    /* 左揃え */
+}
+
+.target-button {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.target-button select {
+    font-size: 10px;
+}
+
+.target-button button {
+    margin: 5px 0;
+    width: 70px;
+}
+
+#checkboxMode {
+    display: none;
+}
+
+strong {
+    font-size: 12px;
+}
+
+.card.unknown {
+    height: 40px;
+}
+
+#resultAreaWrapper {
+    display: flex;
+    gap: 10px;
+    width: 0 auto;
+    width: 100%;
+}
+
+#prevResultArea,
+#resultArea {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 8px;
+    overflow-x: auto;
+    width: 100%;
+}
+
+#label-font-size {
+    font-size: 0.8em;
+}
+
+/* ============================================
+   🔹 検索欄
+============================================ */
+.card:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 5px #aaa;
+}
+
+
+
+input[type="text"] {
+    padding: 10px;
+    width: 500px;
+    border: 1px solid #bbb;
+    font-size: 1em;
+    height: 30px;
+    margin: 10px 0;
+}
+
+button[type="submit"] {
+    padding: 10px;
+    font-size: 1em;
+    width: 100px;
+    height: 50px;
+    margin: 20px 0;
+}
+
+/* ボタン */
+button[type="submit"],
+#resetButton,
+#resetDeck {
+    background-color: #4b4c4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #4b4c4d;
+}
+
+/*ボタンに触れると色が変わる*/
+button:active,
+#resetButton:active,
+#resetDeck:active {
+    transform: scale(0.9);
+}
+
+
+
+/* フィルター：PCでは横並び */
+select {
+    appearance: none;
+    /* 標準 */
+    -webkit-appearance: none;
+    /* Safari */
+    -moz-appearance: none;
+    /* Firefox */
+    background: none;
+    /* 背景の矢印アイコン除去 */
+    background-image: none;
+    /* 念のため */
+}
+
+.filter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    gap: 1px;
+}
+
+/* 各フィルターのペア（ラベル＋セレクト） */
+.filter-pair {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+    max-width: 100%;
+}
+
+.filter-pair label {
+    width: 100%;
+    text-align: left;
+    margin-left: 5px;
+}
+
+
+/* セレクト */
+.filter-pair select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 8px;
+    border: 1px solid #bbb;
+}
+
+/* 汎用セレクト・ラベル */
+label,
+select {
+    display: block;
+    margin: 5px 0 5px 0;
+}
+
+
+/* スキル選択 */
+#skillColumn {
+    margin-bottom: 0;
+    display: none;
+}
+
+#skillSelect {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    max-width: 100%;
+}
+
+/*回復からその他まで*/
+#skillSelect label {
+    background: white;
+    cursor: pointer;
+    -webkit-user-select: none;
+    /* Safari用 */
+    -ms-user-select: none;
+    /* IE用（必要なら） */
+    user-select: none;
+    /* 標準 */
+    margin: 0;
+    flex: 0 0 calc(17% - 8px);
+    /* 横幅を2分割（gapの分を差し引く） */
+    font-size: 0.9em;
+    margin-bottom: 0;
+    align-items: center;
+    /* チェックボックスと文字を垂直中央に揃える */
+    border-radius: 0;
+}
+
+#skillSelect input[type="checkbox"] {
+    margin: 10px 0px 10px 20px;
+    padding-top: 0px;
+    accent-color: 29#4b4c4d;
+    /* 緑など好きな色に */
+}
+
+
+/* 各スキル詳細 */
+[id$="DetailContainer"] {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-left: 4px solid #4b4c4d;
+}
+
+/*それぞれの詳細条件*/
+.detail-container {
+    display: none;
+}
+
+.detail-container select {
+    width: 250px;
+    height: 35px;
+    /* 必要に応じて調整 */
+    padding: 8px;
+    font-size: 0.8em;
+    border: 1px solid #bbb;
+    margin: 5px 0 0 0;
+}
+
+.detail-container label {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+#searchResetButton {
+    width: 200px;
+    padding: 20px;
+}
+
+/* カード一覧 */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    /* カード間の余白 */
+    justify-content: flex-start;
+    padding: 0px;
+    background-color: #f5f7fa;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* カード本体 */
+
+.click-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: white;
+    background-color: #4b4c4d;
+    padding: 4px 8px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.card {
+    padding: 5px;
+    border: none;
+    flex: 1 1 calc(33.33% - 16px);
+    min-width: 160px;
+    height: 200px;
+}
+
+#space {
+    margin-left: 1px;
+}
+
+
+/* カードヘッダー */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.card-header,
+.label,
+.value {
+    font-size: 16px;
+}
+
+/* タイプアイコン */
+.type-icon,
+.energy-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.energy-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+
+.card-title {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+
+
+.value {
+    margin-right: 5px;
+}
+
+.card-info p {
+    margin-top: 10px;
+    font-size: 12px;
+    display: flex;
+}
+
+
+
+/* カード詳細 */
+.card-body {
+    padding: 2px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-bottom: 6px;
+}
+
+
+/* トグルボタンのスタイル */
+.toggle-skill-btn {
+    display: none;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    background-color: #4b4c4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #4b4c4d;
+}
+
+/* デフォルト：大画面では表示 */
+#skillSection {
+    display: block;
+    background-color: #4b4c4d;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+
+.card.grass {
+    background-color: #d4f4d2;
+    /* 少し鮮やかに */
+    color: #2e5c2e;
+}
+
+.card.fire {
+    background-color: #ffe4e1;
+    color: #bb2f2f;
+}
+
+.card.water {
+    background-color: #dceeff;
+    color: #225577;
+}
+
+.card.electric {
+    background-color: #fffac0;
+    color: #886600;
+}
+
+.card.psychic {
+    background-color: #f7dbfa;
+    color: #722e80;
+}
+
+.card.fighting {
+    background-color: #ffe7c2;
+    color: #7a3f00;
+}
+
+.card.dark {
+    background-color: #cccccc;
+    color: #222222;
+}
+
+.card.steel {
+    background-color: #e0e0e0;
+    color: #444444;
+}
+
+.card.dragon {
+    background-color: #fef3c4;
+    color: #774400;
+}
+
+.card.colorless {
+    background-color: #f3f3f3;
+    color: #555555;
+}
+
+
+@media screen and (max-width: 1600px) {
+    #skillSelect label {
+        flex: 0 0 calc(25% - 8px);
+        /* 横幅を2分割（gapの分を差し引く） */
+    }
+}
+
+
+
+/* メディア対応（タブレット） */
+@media screen and (max-width: 1100px) {
+    form {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    input[type="text"] {
+        width: 250px;
+        max-width: 90%;
+        font-size: 1em;
+    }
+
+    /* カードドロップゾーン */
+    .card-drop-zone {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+    }
+
+
+    #skillSelect {
+        gap: 8px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #skillSelect label {
+        font-size: 0.8em;
+        flex: 0 0 calc(30%);
+    }
+
+    #skillSelect input[type="checkbox"] {
+        margin: 10px 0px 10px 10px;
+    }
+
+    #cardContainer {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .toggle-skill-btn {
+        display: block;
+    }
+
+    #skillSection {
+        display: none;
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 730px) {
+
+    /* カードドロップゾーン */
+    .card-drop-zone {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (min-width: 1401px) {
+    #skillSection {
+        display: block !important;
+    }
+}

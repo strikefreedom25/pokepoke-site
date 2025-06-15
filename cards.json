@@ -13382,5 +13382,28 @@
         "atk2_energy": "",
         "atk2_ability": "",
         "character_ability": ""
+    },
+    {
+        "__sheet__": "support",
+        "name": "博士の研究",
+        "number": "P-A_007",
+        "skill_type": "draw",
+        "target": "random",
+        "amount": 2
+    },
+    {
+        "__sheet__": "item",
+        "name": "モンスターボール",
+        "number": "P-A_005",
+        "skill_type": "draw",
+        "target": 0,
+        "amount": 1
+    },
+    {
+        "__sheet__": "item",
+        "name": "ふしぎなアメ",
+        "number": "A3_144",
+        "skill_type": "evo_skip",
+        "target": 0
     }
 ]
